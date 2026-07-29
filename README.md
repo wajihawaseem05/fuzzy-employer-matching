@@ -1,7 +1,7 @@
 # Employer Name Matching Across Two Administrative Datasets
 
 A fuzzy-matching pipeline that reconciles employer records across two
-independently-collected datasets — a common data-cleaning problem in labor
+independently-collected datasets - a common data-cleaning problem in labor
 economics research, where the same employer is rarely spelled the same way
 twice.
 
@@ -28,7 +28,7 @@ sources:
 
 Neither file shared a common ID, so employers had to be linked by **name**,
 tolerating punctuation differences, legal-suffix differences (`Inc.`,
-`LLC`, `Corp.`), and minor misspellings — while excluding names that are
+`LLC`, `Corp.`), and minor misspellings - while excluding names that are
 merely *similar* but represent different real companies.
 
 ## Methodology
