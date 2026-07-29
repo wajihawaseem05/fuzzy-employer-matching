@@ -1,7 +1,7 @@
 # Employer Name Matching Across Two Administrative Datasets
 
 A fuzzy-matching pipeline that reconciles employer records across two
-independently-collected datasets - a common data-cleaning problem in labor
+independently-collected datasets. This is a common data-cleaning problem in labor
 economics research, where the same employer is rarely spelled the same way
 twice.
 
@@ -28,8 +28,8 @@ sources:
 
 Neither file shared a common ID, so employers had to be linked by **name**,
 tolerating punctuation differences, legal-suffix differences (`Inc.`,
-`LLC`, `Corp.`), and minor misspellings - while excluding names that are
-merely *similar* but represent different real companies.
+`LLC`, `Corp.`), and minor misspellings, while excluding names that are
+merely *similar* but represent different real companies. 
 
 ## Methodology
 
@@ -40,8 +40,8 @@ merely *similar* but represent different real companies.
    - Sum `freq` for exact duplicate `(employer_id, name, year)` rows.
    - For each `employer_id`, keep only the **year with the highest freq**
      (an employer's most representative year).
-   - Where multiple `employer_id`s reduce to the same cleaned name — the
-     inconsistent-naming case — keep only the one with the **highest freq**.
+   - Where multiple `employer_id`s reduce to the same cleaned name - the
+     inconsistent-naming case - keep only the one with the **highest freq**.
    - This leaves exactly one candidate row per real-world employer in
      Source B.
 3. **Fuzzy-match** each Source A employer against the cleaned Source B
@@ -98,14 +98,14 @@ based on, not just a stated number.
 ![Similarity score distribution](assets/similarity_score_distribution.png)
 
 Valid and invalid matches separate into two distinct clusters rather than
-overlapping — there's a real gap in the low-90s to high-80s range where
+overlapping. There's a real gap in the low-90s to high-80s range where
 genuine matches (different punctuation, abbreviated words, minor
 misspellings) end and coincidental name overlaps begin.
 
 ![Threshold sensitivity](assets/threshold_sensitivity.png)
 
 The match count is fairly flat through the high 80s/low 90s and only starts
-dropping sharply past the mid-90s — meaning the threshold isn't sitting on
+dropping sharply past the mid-90s, meaning the threshold isn't sitting on
 a knife's edge where a small change in cutoff would swing the results
 dramatically. That stability is what makes 90 a defensible choice rather
 than an arbitrary one.
@@ -140,7 +140,7 @@ python scripts/analyze_results.py      # generates the two charts above
 - Token-sort ratio was chosen over a plain Levenshtein ratio because
   employer names often have reordered words across sources (e.g.
   `"Harborview Insurance Group"` vs. `"Harborview Insurance Grp"`).
-- This is a **name-based** match only — it does not use address, industry
+- This is a **name-based** match only, it does not use address, industry
   code, or other identifying fields, since the original sources did not
   reliably share those either.
 - At full scale (82K+ rows against several million), the same logic was
